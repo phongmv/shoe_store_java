@@ -6,6 +6,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @WebServlet(name = "HomeController", value = {"/home", "/home/*"})
@@ -22,57 +24,48 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Get page number safely without reassigning parameter
-        final int currentPage = getPageNumber(request);
+        String category = request.getParameter("category");
+        int page = getPageNumber(request);
 
-        // Get paginated data
-        PaginationData paginationData = getPaginationData(currentPage);
+        List<Product> products;
+        int totalProducts;
 
-        // Set request attributes
-        request.setAttribute("products", paginationData.getProducts());
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("totalPages", paginationData.getTotalPages());
+        if (category != null && !category.isEmpty()) {
+            products = productService.getProductsByCategoryAndPage(category, page, PRODUCTS_PER_PAGE);
+            totalProducts = productService.getTotalProductsByCategory(category);
+            request.setAttribute("selectedCategory", category);
+        } else {
+            products = productService.getProductsByPage(page, PRODUCTS_PER_PAGE);
+            totalProducts = productService.getTotalProducts();
+        }
+
+        int totalPages = (int) Math.ceil((double) totalProducts / PRODUCTS_PER_PAGE);
+
+        request.setAttribute("products", products);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("paginationUrl", buildPaginationUrl(category));
 
         request.getRequestDispatcher("/views/home.jsp").forward(request, response);
     }
 
+    private String buildPaginationUrl(String category) {
+        try {
+            if (category != null && !category.isEmpty()) {
+                return "home?category=" + URLEncoder.encode(category, StandardCharsets.UTF_8.toString()) + "&page=";
+            }
+        } catch (Exception e) {
+            // Fallback to unencoded if there's an encoding error
+            return "home?category=" + category + "&page=";
+        }
+        return "home?page=";
+    }
+
     private int getPageNumber(HttpServletRequest request) {
         try {
-            String pageParam = request.getParameter("page");
-            if (pageParam != null && !pageParam.isEmpty()) {
-                int page = Integer.parseInt(pageParam);
-                return Math.max(1, page); // Ensure page is at least 1
-            }
+            return Math.max(1, Integer.parseInt(request.getParameter("page")));
         } catch (NumberFormatException e) {
-            // Log error if needed
-        }
-        return 1; // Default to first page
-    }
-
-    private PaginationData getPaginationData(int currentPage) {
-        List<Product> products = productService.getProductsByPage(currentPage, PRODUCTS_PER_PAGE);
-        int totalProducts = productService.getTotalProducts();
-        int totalPages = (int) Math.ceil((double) totalProducts / PRODUCTS_PER_PAGE);
-
-        return new PaginationData(products, totalPages);
-    }
-
-    // Helper class to hold pagination data
-    private static class PaginationData {
-        private final List<Product> products;
-        private final int totalPages;
-
-        public PaginationData(List<Product> products, int totalPages) {
-            this.products = products;
-            this.totalPages = totalPages;
-        }
-
-        public List<Product> getProducts() {
-            return products;
-        }
-
-        public int getTotalPages() {
-            return totalPages;
+            return 1;
         }
     }
 }
