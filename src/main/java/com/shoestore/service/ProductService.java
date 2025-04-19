@@ -18,4 +18,12 @@ public class ProductService {
     public Product getProductById(int id) {
         return productDAO.getProductById(id);
     }
+
+    public List<Product> getProductsByPage(int page, int productsPerPage) {
+        return productDAO.getProductsByPage(page, productsPerPage);
+    }
+
+    public int getTotalProducts() {
+        return productDAO.getTotalProducts();
+    }
 }

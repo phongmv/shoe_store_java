@@ -7,6 +7,7 @@ public class Product {
     private double price;
     private String imageUrl;
     private int stock;
+    private String category;
 
     // Constructors
     public Product() {}
@@ -17,6 +18,15 @@ public class Product {
         this.price = price;
         this.imageUrl = imageUrl;
         this.stock = stock;
+    }
+
+    public Product(String name, String description, double price, String imageUrl, int stock, String category) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.stock = stock;
+        this.category = category;
     }
 
     // Getters and setters
@@ -66,5 +76,27 @@ public class Product {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    // Optional: toString() method for debugging
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", stock=" + stock +
+                ", category='" + category + '\'' +
+                '}';
     }
 }
