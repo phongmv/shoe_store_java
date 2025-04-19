@@ -1,7 +1,7 @@
 package com.shoestore.model;
 
 public class User {
-    private int id;
+    private int user_id;
     private String username;
     private String password;
     private String email;
@@ -23,11 +23,11 @@ public class User {
 
     // Getters and setters
     public int getId() {
-        return id;
+        return user_id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.user_id = id;
     }
 
     public String getUsername() {

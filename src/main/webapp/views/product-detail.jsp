@@ -9,10 +9,12 @@
   <title>Shoe Store - ${product.name}</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body class="bg-gray-50">
 <!-- Header -->
-<header class="bg-white shadow-md">
+<header class="bg-white shadow-md fixed top-0 w-screen">
   <div class="container mx-auto px-4 py-4 flex justify-between items-center">
     <div class="text-2xl font-bold text-blue-600">ShoeStore</div>
     <nav class="flex items-center space-x-4">
@@ -45,7 +47,7 @@
 </header>
 
 <!-- Product Detail Section -->
-<section class="py-12">
+<section class="pt-12 h-[700px]">
   <div class="container mx-auto px-4">
     <div class="max-w-6xl mx-auto">
       <!-- Breadcrumb -->
@@ -63,7 +65,7 @@
           <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <img src="${not empty product.imageUrl ? product.imageUrl : 'https://via.placeholder.com/800x600?text=No+Image'}"
                  alt="${product.name}"
-                 class="w-full h-auto object-cover"
+                 class="w-full h-auto object-cover max-h-[400px]"
                  onerror="this.src='https://via.placeholder.com/800x600?text=Image+Error'">
           </div>
         </div>
@@ -121,9 +123,10 @@
     </div>
   </div>
 </section>
+</body>
 
 <!-- Footer -->
-<footer class="bg-gray-800 text-white py-12">
+<footer class="bg-gray-800 text-white py-8">
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <div>
@@ -164,5 +167,4 @@
     </div>
   </div>
 </footer>
-</body>
 </html>

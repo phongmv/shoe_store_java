@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +8,12 @@
   <title>Your Cart - Shoe Store</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body class="min-h-screen bg-gray-100 flex flex-col justify-between">
 
-<header class="bg-white shadow p-4 flex flex-col md:flex-row justify-between items-center">
+<header class="bg-white shadow p-4 flex flex-col md:flex-row justify-between items-center fixed top-0 w-screen">
   <h1 class="text-2xl font-bold text-gray-800 mb-2 md:mb-0">Your Shopping Cart</h1>
   <nav class="space-x-4 text-blue-600">
     <a href="${pageContext.request.contextPath}/home" class="hover:underline">Home</a>
@@ -23,7 +26,7 @@
   </nav>
 </header>
 
-<main class="flex-grow p-6 flex flex-col items-center">
+<main class="flex-grow p-6 flex flex-col items-center pt-32 h-screen">
   <div class="w-full max-w-5xl bg-white shadow rounded-lg p-6">
     <c:choose>
       <c:when test="${empty sessionScope.cart}">
@@ -79,27 +82,16 @@
             </tfoot>
           </table>
         </div>
-
-        <div class="mt-6 flex flex-col items-center space-y-4">
-          <c:if test="${not empty sessionScope.user}">
-            <form action="${pageContext.request.contextPath}/checkout" method="post">
-              <button type="submit" class="w-full md:w-auto bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition">Proceed to Checkout</button>
-            </form>
-          </c:if>
-          <c:if test="${empty sessionScope.user}">
-            <p class="text-gray-600">Please <a href="${pageContext.request.contextPath}/auth/login" class="text-blue-600 hover:underline">login</a> to proceed to checkout.</p>
-          </c:if>
-        </div>
       </c:otherwise>
     </c:choose>
   </div>
 </main>
 
 <!-- Footer -->
-<footer class="bg-gray-800 text-white py-12">
+<footer class="bg-gray-800 text-white py-8">
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="footer-section">
+      <div>
         <h3 class="text-xl font-bold mb-4">Quick Links</h3>
         <ul class="space-y-2">
           <li><a href="${pageContext.request.contextPath}/home" class="hover:text-blue-400 transition">Home</a></li>
@@ -107,34 +99,33 @@
           <li><a href="${pageContext.request.contextPath}/contact" class="hover:text-blue-400 transition">Contact</a></li>
         </ul>
       </div>
-      <div class="footer-section">
+      <div>
         <h3 class="text-xl font-bold mb-4">Customer Service</h3>
         <ul class="space-y-2">
           <li><a href="${pageContext.request.contextPath}/shipping" class="hover:text-blue-400 transition">Shipping Policy</a></li>
           <li><a href="${pageContext.request.contextPath}/returns" class="hover:text-blue-400 transition">Returns & Exchanges</a></li>
         </ul>
       </div>
-      <div class="footer-section">
+      <div>
         <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
         <div class="flex space-x-4">
-          <a href="https://www.facebook.com/login" target="_blank" class="text-2xl hover:text-blue-400 transition">
+          <a href="https://www.facebook.com/login" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
             <i class="fab fa-facebook-f"></i>
           </a>
-          <a href="https://www.instagram.com/accounts/login/" target="_blank" class="text-2xl hover:text-blue-400 transition">
+          <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
             <i class="fab fa-instagram"></i>
           </a>
-          <a href="https://twitter.com/login" target="_blank" class="text-2xl hover:text-blue-400 transition">
+          <a href="https://twitter.com/login" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
             <i class="fab fa-twitter"></i>
           </a>
-          <a href="https://www.pinterest.com/login/" target="_blank" class="text-2xl hover:text-blue-400 transition">
+          <a href="https://www.pinterest.com/login/" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
             <i class="fab fa-pinterest"></i>
           </a>
-
         </div>
       </div>
     </div>
     <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-      <p>&copy; 2023 ShoeStore. All rights reserved.</p>
+      <p>&copy; <script>document.write(new Date().getFullYear())</script> ShoeStore. All rights reserved.</p>
     </div>
   </div>
 </footer>

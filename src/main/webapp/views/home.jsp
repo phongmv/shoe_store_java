@@ -12,7 +12,7 @@
 </head>
 <body class="bg-gray-50">
 <!-- Header -->
-<header class="bg-white shadow-md">
+<header class="bg-white shadow-md fixed top-0 w-screen">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
         <div class="text-2xl font-bold text-blue-600">ShoeStore</div>
         <nav class="flex items-center space-x-4">
@@ -100,22 +100,14 @@
                 </c:when>
                 <c:otherwise>
                     <c:forEach items="${products}" var="product">
+                        <a href="${pageContext.request.contextPath}/product-detail?id=${product.id}">
                         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 transform hover:-translate-y-1">
                             <div class="relative">
                                 <img src="${not empty product.imageUrl ? product.imageUrl : 'https://via.placeholder.com/300x200?text=No+Image'}"
                                      alt="${product.name}"
                                      class="w-full h-48 object-cover"
                                      onerror="this.src='https://via.placeholder.com/300x200?text=Image+Error'">
-                                <div class="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
-                                    <a href="${pageContext.request.contextPath}/cart/add?productId=${product.id}"
-                                       class="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition duration-200 transform hover:scale-110">
-                                        <i class="fas fa-cart-plus"></i>
-                                    </a>
-                                    <a href="${pageContext.request.contextPath}/product-detail?id=${product.id}"
-                                       class="bg-gray-800 hover:bg-gray-900 text-white p-2 rounded-full transition duration-200 transform hover:scale-110">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                </div>
+
                             </div>
                             <div class="p-4">
                                 <h3 class="font-semibold text-lg mb-1 truncate">${product.name}</h3>
@@ -125,6 +117,7 @@
                                 </span>
                             </div>
                         </div>
+                        </a>
                     </c:forEach>
                 </c:otherwise>
             </c:choose>
@@ -260,7 +253,7 @@
 </section>
 
 <!-- Footer -->
-<footer class="bg-gray-800 text-white py-12">
+<footer class="bg-gray-800 text-white py-8">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
