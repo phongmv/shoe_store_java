@@ -10,12 +10,30 @@
 
 </head>
 <body class="min-h-screen bg-gray-100 flex flex-col justify-between">
-<header class="bg-white shadow p-4 flex justify-between items-center fixed top-0 w-screen">
-  <h1 class="text-2xl font-bold text-gray-800">Register</h1>
-  <nav class="space-x-4">
-    <a href="${pageContext.request.contextPath}/home" class="text-blue-600 hover:underline">Home</a>
-    <a href="${pageContext.request.contextPath}/auth/login" class="text-blue-600 hover:underline">Login</a>
-  </nav>
+<%--Header--%>
+<header class="bg-white shadow-md fixed top-0 w-screen z-[999]">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="text-2xl font-bold text-blue-600">
+      <a href="${pageContext.request.contextPath}/home">
+        Shoe Store
+      </a>
+    </div>
+    <nav class="flex items-center space-x-4">
+      <c:if test="${not empty sessionScope.user}">
+                <span class="flex items-center text-gray-700">
+                    <i class="fas fa-user mr-1"></i> ${sessionScope.user.fullName}
+                </span>
+        <a href="${pageContext.request.contextPath}/auth/logout" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
+          <i class="fas fa-sign-out-alt mr-1"></i> Logout
+        </a>
+      </c:if>
+      <c:if test="${empty sessionScope.user}">
+        <a href="${pageContext.request.contextPath}/auth/login" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
+          <i class="fas fa-sign-in-alt mr-1"></i> Login
+        </a>
+      </c:if>
+    </nav>
+  </div>
 </header>
 
 <main class="flex-grow flex justify-center items-center px-4 pt-32 h-screen">
@@ -24,6 +42,10 @@
     <c:if test="${not empty error}">
       <p class="text-red-500 text-sm font-medium">${error}</p>
     </c:if>
+    <div class="mx-auto text-center text-2xl font-bold">
+      <i class="fas fa-user-plus mr-1"></i>
+        Register
+    </div>
     <div>
       <label for="username" class="block text-gray-700 font-semibold mb-2">Username:</label>
       <input type="text" id="username" name="username" required
@@ -61,45 +83,6 @@
 </body>
 
 <!-- Footer -->
-<footer class="bg-gray-800 text-white py-8">
-  <div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div>
-        <h3 class="text-xl font-bold mb-4">Quick Links</h3>
-        <ul class="space-y-2">
-          <li><a href="${pageContext.request.contextPath}/home" class="hover:text-blue-400 transition">Home</a></li>
-          <li><a href="${pageContext.request.contextPath}/about" class="hover:text-blue-400 transition">About Us</a></li>
-          <li><a href="${pageContext.request.contextPath}/contact" class="hover:text-blue-400 transition">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-xl font-bold mb-4">Customer Service</h3>
-        <ul class="space-y-2">
-          <li><a href="${pageContext.request.contextPath}/shipping" class="hover:text-blue-400 transition">Shipping Policy</a></li>
-          <li><a href="${pageContext.request.contextPath}/returns" class="hover:text-blue-400 transition">Returns & Exchanges</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
-        <div class="flex space-x-4">
-          <a href="https://www.facebook.com/login" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://twitter.com/login" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="https://www.pinterest.com/login/" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-            <i class="fab fa-pinterest"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-      <p>&copy; <script>document.write(new Date().getFullYear())</script> ShoeStore. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
+<jsp:include page="./footer.jsp" />
+
 </html>

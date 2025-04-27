@@ -30,14 +30,14 @@ public class DispatcherServlet extends HttpServlet {
             case "/product":
                 request.getRequestDispatcher("/views/product-detail.jsp").forward(request, response);
                 break;
+            case "/product-new":
+                request.getRequestDispatcher("/views/product-new.jsp").forward(request, response);
+                break;
             case "/cart":
                 request.getRequestDispatcher("/views/cart.jsp").forward(request, response);
                 break;
             case "/about":
                 request.getRequestDispatcher("/views/about.jsp").forward(request, response);
-                break;
-            case "/contact":
-                request.getRequestDispatcher("/views/contact.jsp").forward(request, response);
                 break;
             case "/shipping":
                 request.getRequestDispatcher("/views/shipping.jsp").forward(request, response);

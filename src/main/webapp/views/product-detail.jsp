@@ -13,41 +13,11 @@
 
 </head>
 <body class="bg-gray-50">
-<!-- Header -->
-<header class="bg-white shadow-md fixed top-0 w-screen">
-  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-    <div class="text-2xl font-bold text-blue-600">ShoeStore</div>
-    <nav class="flex items-center space-x-4">
-      <c:if test="${not empty sessionScope.user}">
-                <span class="flex items-center text-gray-700">
-                    <i class="fas fa-user mr-1"></i> ${sessionScope.user.fullName}
-                </span>
-        <a href="${pageContext.request.contextPath}/auth/logout" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
-          <i class="fas fa-sign-out-alt mr-1"></i> Logout
-        </a>
-      </c:if>
-      <c:if test="${empty sessionScope.user}">
-        <a href="${pageContext.request.contextPath}/auth/login" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
-          <i class="fas fa-sign-in-alt mr-1"></i> Login
-        </a>
-        <a href="${pageContext.request.contextPath}/auth/register" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
-          <i class="fas fa-user-plus mr-1"></i> Register
-        </a>
-      </c:if>
-      <a href="${pageContext.request.contextPath}/cart" class="relative bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
-        <i class="fas fa-shopping-cart mr-1"></i> Cart
-        <c:if test="${not empty sessionScope.cart}">
-                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                        ${fn:length(sessionScope.cart)}
-                    </span>
-        </c:if>
-      </a>
-    </nav>
-  </div>
-</header>
+<%--Header--%>
+<jsp:include page="header.jsp"/>
 
 <!-- Product Detail Section -->
-<section class="pt-12 h-[700px]">
+<section class="pt-[80px] h-[700px]">
   <div class="container mx-auto px-4">
     <div class="max-w-6xl mx-auto">
       <!-- Breadcrumb -->
@@ -126,45 +96,6 @@
 </body>
 
 <!-- Footer -->
-<footer class="bg-gray-800 text-white py-8">
-  <div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div>
-        <h3 class="text-xl font-bold mb-4">Quick Links</h3>
-        <ul class="space-y-2">
-          <li><a href="${pageContext.request.contextPath}/home" class="hover:text-blue-400 transition">Home</a></li>
-          <li><a href="${pageContext.request.contextPath}/about" class="hover:text-blue-400 transition">About Us</a></li>
-          <li><a href="${pageContext.request.contextPath}/contact" class="hover:text-blue-400 transition">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-xl font-bold mb-4">Customer Service</h3>
-        <ul class="space-y-2">
-          <li><a href="${pageContext.request.contextPath}/shipping" class="hover:text-blue-400 transition">Shipping Policy</a></li>
-          <li><a href="${pageContext.request.contextPath}/returns" class="hover:text-blue-400 transition">Returns & Exchanges</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
-        <div class="flex space-x-4">
-          <a href="https://www.facebook.com/login" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://twitter.com/login" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="https://www.pinterest.com/login/" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-            <i class="fab fa-pinterest"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-      <p>&copy; <script>document.write(new Date().getFullYear())</script> ShoeStore. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
+<jsp:include page="./footer.jsp" />
+
 </html>

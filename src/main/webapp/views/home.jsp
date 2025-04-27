@@ -11,47 +11,60 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="bg-gray-50">
-<!-- Header -->
-<header class="bg-white shadow-md fixed top-0 w-screen">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div class="text-2xl font-bold text-blue-600">ShoeStore</div>
-        <nav class="flex items-center space-x-4">
-            <c:if test="${not empty sessionScope.user}">
-                <span class="flex items-center text-gray-700">
-                    <i class="fas fa-user mr-1"></i> ${sessionScope.user.fullName}
-                </span>
-                <a href="${pageContext.request.contextPath}/auth/logout" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
-                    <i class="fas fa-sign-out-alt mr-1"></i> Logout
-                </a>
-            </c:if>
-            <c:if test="${empty sessionScope.user}">
-                <a href="${pageContext.request.contextPath}/auth/login" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
-                    <i class="fas fa-sign-in-alt mr-1"></i> Login
-                </a>
-                <a href="${pageContext.request.contextPath}/auth/register" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
-                    <i class="fas fa-user-plus mr-1"></i> Register
-                </a>
-            </c:if>
-            <a href="${pageContext.request.contextPath}/cart" class="relative bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
-                <i class="fas fa-shopping-cart mr-1"></i> Cart
-                <c:if test="${not empty sessionScope.cart}">
-                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                            ${fn:length(sessionScope.cart)}
-                    </span>
-                </c:if>
-            </a>
-        </nav>
-    </div>
-</header>
+
+<%--Header--%>
+<jsp:include page="./header.jsp"/>
 
 <!-- Hero Section -->
-<section class="bg-blue-600 text-white py-20">
-    <div class="container mx-auto px-4 text-center">
-        <h2 class="text-4xl font-bold mb-4">Step Into Comfort & Style</h2>
-        <p class="text-xl mb-8">Discover our premium collection of footwear designed for every occasion</p>
-        <a href="#featured" class="inline-block bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-md font-medium transition">
-            Shop Collection
-        </a>
+<section class="bg-blue-600 text-white pt-20"></section>
+
+<!-- Categories Section -->
+<section class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Shop by Category</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden text-center hover:shadow-lg transition ${selectedCategory eq 'Running' ? 'ring-2 ring-blue-500' : ''}">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                     alt="Running Shoes"
+                     class="w-full h-48 object-cover"
+                     onerror="this.src='https://via.placeholder.com/600x400?text=Running+Shoes'">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-4">Running</h3>
+                    <a href="${pageContext.request.contextPath}/home?category=Running&page=1"
+                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
+                        View Collection
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md overflow-hidden text-center hover:shadow-lg transition ${selectedCategory eq 'Casual' ? 'ring-2 ring-blue-500' : ''}">
+                <img src="https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600"
+                     alt="Casual Shoes"
+                     class="w-full h-48 object-cover"
+                     onerror="this.src='https://via.placeholder.com/600x400?text=Casual+Shoes'">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-4">Casual</h3>
+                    <a href="${pageContext.request.contextPath}/home?category=Casual&page=1"
+                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
+                        View Collection
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md overflow-hidden text-center hover:shadow-lg transition ${selectedCategory eq 'Sneakers' ? 'ring-2 ring-blue-500' : ''}">
+                <img src="https://cdn.pixabay.com/photo/2016/11/19/18/06/feet-1840619_960_720.jpg"
+                     alt="Sneakers"
+                     class="w-full h-48 object-cover"
+                     onerror="this.src='https://via.placeholder.com/600x400?text=Sneakers'">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-4">Sneakers</h3>
+                    <a href="${pageContext.request.contextPath}/home?category=Sneakers&page=1"
+                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
+                        View Collection
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -202,98 +215,9 @@
     </div>
 </section>
 
-<!-- Categories Section -->
-<section class="py-16 bg-gray-100">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">Shop by Category</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden text-center hover:shadow-lg transition ${selectedCategory eq 'Running' ? 'ring-2 ring-blue-500' : ''}">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                     alt="Running Shoes"
-                     class="w-full h-48 object-cover"
-                     onerror="this.src='https://via.placeholder.com/600x400?text=Running+Shoes'">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-4">Running</h3>
-                    <a href="${pageContext.request.contextPath}/home?category=Running&page=1"
-                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
-                        View Collection
-                    </a>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-md overflow-hidden text-center hover:shadow-lg transition ${selectedCategory eq 'Casual' ? 'ring-2 ring-blue-500' : ''}">
-                <img src="https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600"
-                     alt="Casual Shoes"
-                     class="w-full h-48 object-cover"
-                     onerror="this.src='https://via.placeholder.com/600x400?text=Casual+Shoes'">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-4">Casual</h3>
-                    <a href="${pageContext.request.contextPath}/home?category=Casual&page=1"
-                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
-                        View Collection
-                    </a>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-md overflow-hidden text-center hover:shadow-lg transition ${selectedCategory eq 'Sneakers' ? 'ring-2 ring-blue-500' : ''}">
-                <img src="https://cdn.pixabay.com/photo/2016/11/19/18/06/feet-1840619_960_720.jpg"
-                     alt="Sneakers"
-                     class="w-full h-48 object-cover"
-                     onerror="this.src='https://via.placeholder.com/600x400?text=Sneakers'">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-4">Sneakers</h3>
-                    <a href="${pageContext.request.contextPath}/home?category=Sneakers&page=1"
-                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
-                        View Collection
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Footer -->
-<footer class="bg-gray-800 text-white py-8">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <h3 class="text-xl font-bold mb-4">Quick Links</h3>
-                <ul class="space-y-2">
-                    <li><a href="${pageContext.request.contextPath}/home" class="hover:text-blue-400 transition">Home</a></li>
-                    <li><a href="${pageContext.request.contextPath}/about" class="hover:text-blue-400 transition">About Us</a></li>
-                    <li><a href="${pageContext.request.contextPath}/contact" class="hover:text-blue-400 transition">Contact</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-4">Customer Service</h3>
-                <ul class="space-y-2">
-                    <li><a href="${pageContext.request.contextPath}/shipping" class="hover:text-blue-400 transition">Shipping Policy</a></li>
-                    <li><a href="${pageContext.request.contextPath}/returns" class="hover:text-blue-400 transition">Returns & Exchanges</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
-                <div class="flex space-x-4">
-                    <a href="https://www.facebook.com/login" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://twitter.com/login" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="https://www.pinterest.com/login/" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-                        <i class="fab fa-pinterest"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> ShoeStore. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
+<jsp:include page="./footer.jsp" />
 
 </body>
 </html>

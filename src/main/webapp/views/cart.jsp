@@ -13,18 +13,8 @@
 </head>
 <body class="min-h-screen bg-gray-100 flex flex-col justify-between">
 
-<header class="bg-white shadow p-4 flex flex-col md:flex-row justify-between items-center fixed top-0 w-screen">
-  <h1 class="text-2xl font-bold text-gray-800 mb-2 md:mb-0">Your Shopping Cart</h1>
-  <nav class="space-x-4 text-blue-600">
-    <a href="${pageContext.request.contextPath}/home" class="hover:underline">Home</a>
-    <c:if test="${not empty sessionScope.user}">
-      <a href="${pageContext.request.contextPath}/auth/logout" class="hover:underline">Logout</a>
-    </c:if>
-    <c:if test="${empty sessionScope.user}">
-      <a href="${pageContext.request.contextPath}/auth/login" class="hover:underline">Login</a>
-    </c:if>
-  </nav>
-</header>
+<%--Header--%>
+<jsp:include page="header.jsp"/>
 
 <main class="flex-grow p-6 flex flex-col items-center pt-32 h-screen">
   <div class="w-full max-w-5xl bg-white shadow rounded-lg p-6">
@@ -88,47 +78,6 @@
 </main>
 
 <!-- Footer -->
-<footer class="bg-gray-800 text-white py-8">
-  <div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div>
-        <h3 class="text-xl font-bold mb-4">Quick Links</h3>
-        <ul class="space-y-2">
-          <li><a href="${pageContext.request.contextPath}/home" class="hover:text-blue-400 transition">Home</a></li>
-          <li><a href="${pageContext.request.contextPath}/about" class="hover:text-blue-400 transition">About Us</a></li>
-          <li><a href="${pageContext.request.contextPath}/contact" class="hover:text-blue-400 transition">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-xl font-bold mb-4">Customer Service</h3>
-        <ul class="space-y-2">
-          <li><a href="${pageContext.request.contextPath}/shipping" class="hover:text-blue-400 transition">Shipping Policy</a></li>
-          <li><a href="${pageContext.request.contextPath}/returns" class="hover:text-blue-400 transition">Returns & Exchanges</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
-        <div class="flex space-x-4">
-          <a href="https://www.facebook.com/login" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://twitter.com/login" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="https://www.pinterest.com/login/" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-blue-400 transition">
-            <i class="fab fa-pinterest"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-      <p>&copy; <script>document.write(new Date().getFullYear())</script> ShoeStore. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
-
+<jsp:include page="./footer.jsp" />
 </body>
 </html>
