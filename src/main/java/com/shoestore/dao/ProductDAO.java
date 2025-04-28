@@ -18,11 +18,12 @@ public class ProductDAO {
         product.setName(rs.getString("name"));
         product.setDescription(rs.getString("description"));
         product.setPrice(rs.getDouble("price"));
-        product.setImageUrl(rs.getString("image_url"));
+        product.setImage(rs.getBytes("image")); // Lấy dữ liệu ảnh từ trường image (kiểu BLOB)
         product.setStock(rs.getInt("stock"));
         product.setCategory(rs.getString("category"));
         return product;
     }
+
 
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
@@ -154,4 +155,32 @@ public class ProductDAO {
         }
         return categories;
     }
+
+    public boolean addProduct(Product product) {
+        String sql = "INSERT INTO products (name, description, price, stock, category, image) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, product.getName());
+            stmt.setString(2, product.getDescription());
+            stmt.setDouble(3, product.getPrice());
+            stmt.setInt(4, product.getStock());
+            stmt.setString(5, product.getCategory());
+
+            if (product.getImage() != null) {
+                stmt.setBytes(6, product.getImage()); // Lưu ảnh dưới dạng byte[]
+            } else {
+                stmt.setNull(6, Types.BLOB); // Nếu không có ảnh, gán NULL
+            }
+
+            int rowsInserted = stmt.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error adding product", e);
+        }
+        return false;
+    }
+
+
 }

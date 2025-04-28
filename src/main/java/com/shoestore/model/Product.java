@@ -5,26 +5,26 @@ public class Product {
     private String name;
     private String description;
     private double price;
-    private String imageUrl;
+    private byte[] image; // Thay đổi kiểu dữ liệu của ảnh thành byte[]
     private int stock;
     private String category;
 
     // Constructors
     public Product() {}
 
-    public Product(String name, String description, double price, String imageUrl, int stock) {
+    public Product(String name, String description, double price, byte[] image, int stock) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.imageUrl = imageUrl;
+        this.image = image;
         this.stock = stock;
     }
 
-    public Product(String name, String description, double price, String imageUrl, int stock, String category) {
+    public Product(String name, String description, double price, byte[] image, int stock, String category) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.imageUrl = imageUrl;
+        this.image = image;
         this.stock = stock;
         this.category = category;
     }
@@ -62,12 +62,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public int getStock() {
@@ -94,7 +94,6 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", imageUrl='" + imageUrl + '\'' +
                 ", stock=" + stock +
                 ", category='" + category + '\'' +
                 '}';

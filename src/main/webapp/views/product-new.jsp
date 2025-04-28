@@ -14,7 +14,7 @@
     <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
         <h1 class="text-2xl font-bold text-gray-800 mb-6">Add New Product</h1>
 
-        <form action="${pageContext.request.contextPath}/products" method="post" enctype="multipart/form-data" class="space-y-4">
+        <form action="${pageContext.request.contextPath}/product-new" method="post" enctype="multipart/form-data" class="space-y-4">
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Product Name</label>
                 <input type="text" id="name" name="name" required
@@ -24,6 +24,11 @@
             <div>
                 <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
                 <input type="number" id="price" name="price" step="0.01" min="0" required
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+            </div>
+            <div>
+                <label for="stock" class="block text-sm font-medium text-gray-700">Stock</label>
+                <input type="number" id="stock" name="stock" step="0.01" min="0" required
                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
             </div>
 
@@ -67,13 +72,22 @@
   function previewImage(event) {
     const input = event.target;
     const preview = document.getElementById('imagePreview');
+
     if (input.files && input.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        preview.src = e.target.result;
-        preview.classList.remove('hidden');
+      const file = input.files[0];
+
+      // Kiểm tra loại file có phải là hình ảnh không
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert("Please select a valid image file.");
+        preview.classList.add('hidden');
       }
-      reader.readAsDataURL(input.files[0]);
     }
   }
 </script>

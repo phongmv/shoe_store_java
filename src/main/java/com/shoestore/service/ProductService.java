@@ -36,4 +36,9 @@ public class ProductService {
     public List<Product> getProductsByPage(int page, int productsPerPage) {
         return productDAO.getProductsByPage(page, productsPerPage);
     }
+
+    // Cập nhật phương thức addProduct để thêm sản phẩm vào cơ sở dữ liệu với ảnh kiểu byte[]
+    public boolean addProduct(Product product) {
+        return productDAO.addProduct(product);
+    }
 }
