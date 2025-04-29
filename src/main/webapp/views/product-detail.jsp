@@ -76,8 +76,8 @@
                        class="w-20 px-3 py-2 border border-gray-300 rounded-md">
               </div>
               <button type="submit"
-                      class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-md font-medium transition flex items-center justify-center"
-              ${product.stock <= 0 ? 'disabled' : ''}>
+                      class="w-full text-white py-3 px-6 rounded-md font-medium transition flex items-center justify-center
+              ${product.stock <= 0 ? 'disabled bg-gray-600' : 'bg-blue-600'}">
                 <i class="fas fa-cart-plus mr-2"></i> Add to Cart
               </button>
             </form>

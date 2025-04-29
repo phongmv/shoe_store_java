@@ -59,7 +59,12 @@ public class ProductNewServlet extends HttpServlet {
         }
 
         int stock = 0; // Assuming stock is not part of the form in your JSP (this can be added as necessary)
-        // Kiểm tra nếu stock cần được lấy từ form hoặc có giá trị mặc định
+        try {
+            stock = Integer.parseInt(request.getParameter("stock"));
+        } catch (NumberFormatException e) {
+            response.getWriter().write("Invalid stock");
+            return; // Dừng xử lý nếu số lượng không hợp lệ
+        }
 
         // Lấy phần hình ảnh
         Part imagePart = request.getPart("image");
@@ -89,7 +94,7 @@ public class ProductNewServlet extends HttpServlet {
 
         // Xử lý kết quả
         if (isAdded) {
-            response.sendRedirect(request.getContextPath() + "/products");
+            response.sendRedirect(request.getContextPath() + "/home");
         } else {
             response.getWriter().write("Failed to add product");
         }

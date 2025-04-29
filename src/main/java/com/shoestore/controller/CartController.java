@@ -36,6 +36,7 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getPathInfo();
+        System.out.println("Action: " + action);
 
         if (action == null) {
             response.sendRedirect(request.getContextPath() + "/cart");
