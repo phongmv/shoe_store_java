@@ -33,7 +33,7 @@
         <!-- Product Image -->
         <div class="md:w-1/2">
           <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <img src="${not empty product.imageUrl ? product.imageUrl : 'https://via.placeholder.com/800x600?text=No+Image'}"
+            <img src="${not empty product.image ? 'data:image/jpeg;base64,'.concat(product.getImageBase64()) : 'https://via.placeholder.com/800x600?text=No+Image'}"
                  alt="${product.name}"
                  class="w-full h-auto object-cover max-h-[400px]"
                  onerror="this.src='https://via.placeholder.com/800x600?text=Image+Error'">

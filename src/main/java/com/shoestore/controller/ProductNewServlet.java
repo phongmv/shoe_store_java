@@ -9,6 +9,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.InputStream;
 
+@MultipartConfig
 @WebServlet("/product-new")
 public class ProductNewServlet extends HttpServlet {
     private ProductService productService;

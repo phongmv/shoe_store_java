@@ -40,8 +40,11 @@
 
             <div>
                 <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-                <input type="text" id="category" name="category"
-                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                <select id="category" name="category" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                    <option value="Casual">Casual</option>
+                    <option value="Sneakers">Sneakers</option>
+                    <option value="Running">Running</option>
+                </select>
             </div>
 
             <div>

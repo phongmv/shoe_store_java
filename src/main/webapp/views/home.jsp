@@ -116,7 +116,7 @@
                         <a href="${pageContext.request.contextPath}/product-detail?id=${product.id}">
                         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 transform hover:-translate-y-1">
                             <div class="relative">
-                                <img src="${not empty product.imageUrl ? product.imageUrl : 'https://via.placeholder.com/300x200?text=No+Image'}"
+                                <img src="${not empty product.image ? 'data:image/jpeg;base64,'.concat(product.getImageBase64()) : 'https://via.placeholder.com/300x200?text=No+Image'}"
                                      alt="${product.name}"
                                      class="w-full h-48 object-cover"
                                      onerror="this.src='https://via.placeholder.com/300x200?text=Image+Error'">

@@ -5,7 +5,7 @@ public class Product {
     private String name;
     private String description;
     private double price;
-    private byte[] image; // Thay đổi kiểu dữ liệu của ảnh thành byte[]
+    private byte[] image;
     private int stock;
     private String category;
 
@@ -64,6 +64,10 @@ public class Product {
 
     public byte[] getImage() {
         return image;
+    }
+
+    public String getImageBase64() {
+        return null != this.image ? java.util.Base64.getEncoder().encodeToString(this.image) : null;
     }
 
     public void setImage(byte[] image) {
